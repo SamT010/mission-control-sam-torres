@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mission Control · Sam Torres</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header>
+    <div>
+      <h1>🧭 Mission Control</h1>
+      <p>Neto / 3B · Marca blanca · Sam Torres ⚙️</p>
+    </div>
+    <div class="sam-pill" id="samStatusPill">Sam: Working</div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="kanban">Kanban</button>
+    <button class="tab" data-tab="progress">In Progress</button>
+    <button class="tab" data-tab="office">Oficina Digital</button>
+    <button class="tab" data-tab="org">Organigrama</button>
+  </nav>
+
+  <section class="toolbar" id="toolbarKanban">
+    <input id="taskTitle" placeholder="Nueva tarea" />
+    <input id="taskAssignee" placeholder="Asignado a (ej. Sam / Compras)" />
+    <select id="taskPriority">
+      <option value="P0">P0</option>
+      <option value="P1">P1</option>
+      <option value="P2">P2</option>
+    </select>
+    <button id="addTask">Agregar</button>
+    <button id="reset">Reset demo</button>
+  </section>
+
+  <main>
+    <section class="view active" id="view-kanban">
+      <div class="board" id="board"></div>
+    </section>
+
+    <section class="view" id="view-progress">
+      <div class="panel">
+        <h2>Trabajo en progreso</h2>
+        <div id="progressList"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-office">
+      <div class="panel office-grid">
+        <div>
+          <h2>Representación digital de oficina</h2>
+          <p>Estado en tiempo real (manual por ahora):</p>
+          <select id="samStateSelect">
+            <option>Working</option>
+            <option>Deep Work</option>
+            <option>In Meeting</option>
+            <option>Blocked</option>
+            <option>Offline</option>
+          </select>
+          <button id="updateSamState">Actualizar estado</button>
+        </div>
+        <div class="office-map">
+          <div class="desk sam" id="samDesk">
+            <span>⚙️ Sam</span>
+            <small id="samDeskState">Working</small>
+          </div>
+          <div class="desk">Compras</div>
+          <div class="desk">Logística</div>
+          <div class="desk">Comercial</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-org">
+      <div class="panel">
+        <h2>Organigrama (empresa + agentes)</h2>
+        <div class="org" id="orgChart">
+          <div class="node ceo">Emi (Dirección / Pricing final)</div>
+          <div class="row">
+            <div class="node">Comercial</div>
+            <div class="node">Operaciones</div>
+            <div class="node">Finanzas</div>
+            <div class="node">Tech / Data</div>
+          </div>
+          <div class="row" id="agentRow">
+            <div class="node agent">Sam Torres (AI Operator)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="taskDialog">
+    <form method="dialog" class="dialog-form">
+      <h3 id="dTitle"></h3>
+      <label>ID <input id="dId" disabled /></label>
+      <label>Prioridad
+        <select id="dPriority"><option>P0</option><option>P1</option><option>P2</option></select>
+      </label>
+      <label>Asignado a <input id="dAssignee" /></label>
+      <label>Estado
+        <select id="dStatus"><option value="backlog">Backlog</option><option value="doing">Doing</option><option value="blocked">Blocked</option><option value="done">Done</option></select>
+      </label>
+      <label>Detalle <textarea id="dDetail" rows="5" placeholder="Notas, bloqueos, próximos pasos..."></textarea></label>
+      <menu>
+        <button value="cancel">Cerrar</button>
+        <button id="saveTask" value="default">Guardar</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <template id="cardTpl">
+    <article class="card" draggable="true">
+      <div class="row top">
+        <strong class="id"></strong>
+        <span class="priority"></span>
+      </div>
+      <h3 class="title"></h3>
+      <p class="meta"></p>
+    </article>
+  </template>
+
+  <script src="./app.js"></script>
+</body>
+</html>
