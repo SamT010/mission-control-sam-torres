@@ -6,14 +6,16 @@
 .kanban{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:10px;padding:10px}.col{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px;min-height:62vh}.drop{min-height:56vh;display:flex;flex-direction:column;gap:8px}.drop.over{outline:2px dashed #6f8fe3;outline-offset:3px}
 .card{background:var(--panel2);border:1px solid #3d5696;border-radius:10px;padding:8px;cursor:pointer}.row{display:flex;justify-content:space-between}.id{font-size:12px}.title{font-size:14px;margin:6px 0}.meta{margin:0;color:var(--muted);font-size:12px}.priority{font-size:11px;padding:2px 6px;border-radius:999px;background:#304784}
 .section-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px}.section-head h2{margin:0}.legend{font-size:12px;color:var(--muted)}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin:0 6px 0 10px}.dot.w{background:var(--work)}.dot.m{background:var(--move)}.dot.i{background:var(--idle)}
-.office-layout{display:grid;grid-template-columns:1fr 300px;gap:10px;padding:0 10px 10px}.office-map{position:relative;height:560px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background-image:linear-gradient(45deg,#1a274e 25%,#142246 25%,#142246 50%,#1a274e 50%,#1a274e 75%,#142246 75%,#142246 100%);background-size:40px 40px}.desk-row{position:absolute;left:16px;right:16px;top:14px;height:58px;border:1px solid #4c619b;border-radius:8px;background:#2a3d73}
-.desk{position:absolute;width:110px;height:22px;border-radius:4px;background:#9aa6c4;opacity:.9}
-.worker{position:absolute;width:42px;height:54px;cursor:pointer}
-.worker .head{width:16px;height:16px;border-radius:50%;background:#ffd8b8;margin:0 auto 2px;border:1px solid rgba(0,0,0,.25)}
-.worker .body{width:26px;height:24px;border-radius:6px;margin:0 auto;border:1px solid rgba(0,0,0,.25)}
-.worker .name{font-size:10px;text-align:center;font-weight:700;margin-top:2px;text-shadow:0 1px 2px #000}
-.worker.Working .body{box-shadow:0 0 0 2px rgba(52,211,153,.35)}.worker.Moving .body{box-shadow:0 0 0 2px rgba(245,158,11,.35)}.worker.Idle .body{box-shadow:0 0 0 2px rgba(148,163,184,.35)}
-.speech{position:absolute;left:180px;top:94px;background:#0d1428;border:1px solid #405a99;border-radius:8px;padding:8px 10px;font-weight:700;font-size:14px}
+.office-layout{display:grid;grid-template-columns:1fr 320px;gap:10px;padding:0 10px 10px}.office-map{position:relative;height:560px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background-image:linear-gradient(45deg,#2a2a2a 25%,#1f1f1f 25%,#1f1f1f 50%,#2a2a2a 50%,#2a2a2a 75%,#1f1f1f 75%,#1f1f1f 100%);background-size:46px 46px}
+.desk-row{position:absolute;left:16px;right:16px;top:14px;height:58px;border:1px solid #4c619b;border-radius:8px;background:#2a3d73}
+.desk{position:absolute;width:92px;height:34px;border-radius:6px;background:#9aa6c4;border:1px solid #647399}
+.monitor{position:absolute;width:30px;height:20px;border-radius:3px;background:#4fa3ff;left:31px;top:-16px;border:1px solid #214a78}
+.agent{position:absolute;width:44px;height:56px;cursor:pointer;transition:left .7s ease,top .7s ease}
+.agent .head{width:16px;height:16px;border-radius:50%;background:#ffd8b8;margin:0 auto 2px;border:1px solid rgba(0,0,0,.25)}
+.agent .body{width:26px;height:24px;border-radius:6px;margin:0 auto;border:1px solid rgba(0,0,0,.25)}
+.agent .name{font-size:10px;text-align:center;font-weight:700;margin-top:2px;text-shadow:0 1px 2px #000}
+.agent.Working .body{box-shadow:0 0 0 2px rgba(52,211,153,.35)}.agent.Moving .body{box-shadow:0 0 0 2px rgba(245,158,11,.35)}.agent.Idle .body{box-shadow:0 0 0 2px rgba(148,163,184,.35)}
+.speech{position:absolute;left:180px;top:94px;background:#0d1428;border:1px solid #405a99;border-radius:8px;padding:8px 10px;font-weight:700;font-size:14px;max-width:420px}
 .side-panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px}
 .table{padding:10px;display:grid;gap:8px}.rowitem{display:grid;grid-template-columns:1.2fr 1fr .8fr .8fr auto;gap:8px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px}
 .org-wrap{padding:14px;display:flex;flex-direction:column;gap:10px}.org-row{display:flex;gap:8px;flex-wrap:wrap}.org-node{padding:8px 10px;border-radius:9px;border:1px solid #4561a2;background:#1a2953}.ceo{background:#2a3f78}

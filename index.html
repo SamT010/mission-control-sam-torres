@@ -3,33 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mission Control v7</title>
-  <link rel="stylesheet" href="./styles.css?v=7" />
+  <title>Mission Control v8</title>
+  <link rel="stylesheet" href="./styles.css?v=8" />
 </head>
 <body>
   <header class="topbar">
-    <div class="brand">🧭 Mission Control <span>v7</span></div>
-    <nav id="tabs" class="tabs">
-      <button class="tab active" data-tab="tasks">Tasks</button>
-      <button class="tab" data-tab="office">Office</button>
-      <button class="tab" data-tab="workers">Workers</button>
+    <div class="brand">🧭 Mission Control <span>v8</span></div>
+    <nav class="tabs">
+      <button class="tab" data-tab="tasks">Tasks</button>
+      <button class="tab active" data-tab="office">Office</button>
+      <button class="tab" data-tab="agents">AI Agents</button>
       <button class="tab" data-tab="org">Org</button>
     </nav>
     <div class="pill" id="samPill">Sam: Working</div>
   </header>
 
   <main>
-    <section id="view-tasks" class="view active">
+    <section id="view-tasks" class="view">
       <div class="toolbar">
         <input id="taskTitle" placeholder="Nueva tarea" />
-        <input id="taskAssignee" placeholder="Asignado a" />
+        <input id="taskAssignee" placeholder="Asignado a agente" />
         <select id="taskPriority"><option>P0</option><option>P1</option><option>P2</option></select>
         <button id="addTask">Agregar</button>
       </div>
       <div id="kanban" class="kanban"></div>
     </section>
 
-    <section id="view-office" class="view">
+    <section id="view-office" class="view active">
       <div class="section-head">
         <h2>The Office</h2>
         <div class="legend"><span class="dot w"></span>Working <span class="dot m"></span>Moving <span class="dot i"></span>Idle</div>
@@ -37,42 +37,37 @@
       <div class="office-layout">
         <div class="office-map" id="officeMap">
           <div class="desk-row" id="deskRow"></div>
-          <div class="speech" id="speech">Selecciona un worker</div>
+          <div class="speech" id="speech">Selecciona un AI agent</div>
         </div>
         <aside class="side-panel">
-          <h3 id="selName">Worker</h3>
-          <p id="selMeta">Role · Type</p>
+          <h3 id="selName">AI Agent</h3>
+          <p id="selMeta">Role: -</p>
           <label>Estado
-            <select id="workerState"><option>Working</option><option>Moving</option><option>Idle</option></select>
+            <select id="agentState"><option>Working</option><option>Moving</option><option>Idle</option></select>
           </label>
           <label>Tarea actual
-            <textarea id="workerTask" rows="4" placeholder="Qué está haciendo..."></textarea>
+            <textarea id="agentTask" rows="4" placeholder="Qué está haciendo..."></textarea>
           </label>
-          <button id="saveWorker">Guardar</button>
+          <button id="saveAgent">Guardar</button>
+          <small>Regla: si está <b>Working</b>, va a su escritorio; si está <b>Moving/Idle</b>, sale del escritorio.</small>
         </aside>
       </div>
     </section>
 
-    <section id="view-workers" class="view">
+    <section id="view-agents" class="view">
       <div class="toolbar">
-        <input id="wName" placeholder="Nombre worker" />
-        <input id="wRole" placeholder="Rol (ej. Sourcing)" />
-        <select id="wType"><option value="human">Human</option><option value="agent">Agent</option></select>
-        <button id="addWorker">Agregar worker</button>
+        <input id="aName" placeholder="Nombre AI agent" />
+        <input id="aRole" placeholder="Rol (Sourcing, Pricing, Ops...)" />
+        <button id="addAgent">Agregar AI agent</button>
       </div>
-      <div id="workersTable" class="table"></div>
+      <div id="agentsTable" class="table"></div>
     </section>
 
     <section id="view-org" class="view">
       <div class="org-wrap">
         <div class="org-node ceo">Emi · CEO / Pricing final</div>
-        <div class="org-row">
-          <div class="org-node">Comercial</div>
-          <div class="org-node">Operaciones</div>
-          <div class="org-node">Finanzas</div>
-          <div class="org-node">Tech/Data</div>
-        </div>
-        <div class="org-row" id="orgWorkers"></div>
+        <div class="org-row"><div class="org-node">AI Agent Layer</div></div>
+        <div class="org-row" id="orgAgents"></div>
       </div>
     </section>
   </main>
@@ -87,6 +82,6 @@
     </form>
   </dialog>
 
-  <script src="./app.js?v=7"></script>
+  <script src="./app.js?v=8"></script>
 </body>
 </html>
