@@ -3,99 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mission Control · Backbone</title>
-  <link rel="stylesheet" href="./styles.css" />
+  <title>Mission Control Office v5</title>
+  <link rel="stylesheet" href="./styles.css?v=5" />
 </head>
 <body>
   <header class="topbar">
-    <div class="brand">Mission Control</div>
-    <nav class="menu">
-      <button class="tab active" data-tab="tasks">Tasks</button>
-      <button class="tab" data-tab="office">Office</button>
-      <button class="tab" data-tab="org">Org</button>
-      <button class="tab" data-tab="memory">Memory</button>
-    </nav>
+    <div class="left">
+      <div class="logo">🧭 Mission Control <span class="ver">v5</span></div>
+      <nav class="menu">
+        <button class="tab" data-tab="tasks">Tasks</button>
+        <button class="tab">Chat</button>
+        <button class="tab">Council</button>
+        <button class="tab">Calendar</button>
+        <button class="tab">Projects</button>
+        <button class="tab">People</button>
+        <button class="tab active" data-tab="office">Office</button>
+      </nav>
+    </div>
+    <div class="right">Sam: <b id="samPill">Working</b></div>
   </header>
 
   <main>
-    <section class="view active" id="view-tasks">
+    <section class="view" id="view-tasks">
       <div class="toolbar">
         <input id="taskTitle" placeholder="Nueva tarea" />
         <input id="taskAssignee" placeholder="Asignado a" />
-        <select id="taskPriority"><option>P0</option><option>P1</option><option>P2</option></select>
         <button id="addTask">Agregar</button>
       </div>
       <div class="board" id="board"></div>
     </section>
 
-    <section class="view" id="view-office">
+    <section class="view active" id="view-office">
       <div class="office-head">
-        <h2>The Office</h2>
-        <div class="legend"><span class="dot work"></span> Working <span class="dot move"></span> Moving <span class="dot idle"></span> Idle</div>
-      </div>
-      <div class="office-wrap">
-        <div class="office-grid" id="officeGrid"></div>
-        <aside class="office-panel">
-          <h3 id="agentName">Sam Torres</h3>
-          <p id="agentState">Selecciona un agente</p>
-          <label>Status
-            <select id="agentStatus"><option>Working</option><option>Moving</option><option>Idle</option></select>
-          </label>
-          <label>Task actual
-            <textarea id="agentTask" rows="3" placeholder="Qué está haciendo..."></textarea>
-          </label>
-          <button id="saveAgent">Guardar</button>
-
-          <hr />
-          <h4>Team Chat</h4>
-          <div id="chatFeed" class="chat-feed"></div>
-          <input id="chatInput" placeholder="Mensaje interno..." />
-          <button id="sendChat">Enviar</button>
-
-          <hr />
-          <h4>Timeline</h4>
-          <div id="timeline" class="timeline"></div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="view" id="view-org">
-      <div class="panel">
-        <h2>Organization Backbone</h2>
-        <div class="org-row ceo">Emi · CEO / Pricing final</div>
-        <div class="org-row">
-          <div class="org-node">Comercial</div>
-          <div class="org-node">Operaciones</div>
-          <div class="org-node">Finanzas</div>
-          <div class="org-node">Tech/Data</div>
+        <div>
+          <h2>The Office</h2>
+          <p>All team headquarters</p>
         </div>
-        <div class="org-row" id="orgAgents"></div>
+        <div class="legend"><span class="dot work"></span>Working <span class="dot move"></span>Moving <span class="dot idle"></span>Idle</div>
       </div>
-    </section>
 
-    <section class="view" id="view-memory">
-      <div class="panel"><h2>Memory</h2><p>Timeline de decisiones y aprendizajes (siguiente integración con archivos de memoria).</p></div>
+      <div class="office-canvas" id="officeCanvas">
+        <div class="top-desks"></div>
+        <div class="label" id="bubbleLabel">Build Council - Sprint SKU</div>
+      </div>
+
+      <div class="office-controls">
+        <label>Agente
+          <select id="agentPick"></select>
+        </label>
+        <label>Estado
+          <select id="agentState"><option>Working</option><option>Moving</option><option>Idle</option></select>
+        </label>
+        <label>Tarea actual
+          <input id="agentTask" placeholder="Qué está haciendo..." />
+        </label>
+        <button id="saveAgent">Guardar</button>
+      </div>
     </section>
   </main>
 
-  <template id="cardTpl">
-    <article class="card" draggable="true">
-      <div class="row"><strong class="id"></strong><span class="priority"></span></div>
-      <h3 class="title"></h3>
-      <p class="meta"></p>
-    </article>
-  </template>
-
-  <dialog id="taskDialog">
-    <form method="dialog" class="dialog-form">
-      <h3 id="dTitle"></h3>
-      <label>Detalle<textarea id="dDetail" rows="5"></textarea></label>
-      <label>Asignado<input id="dAssignee" /></label>
-      <label>Estado<select id="dStatus"><option value="backlog">Backlog</option><option value="doing">Doing</option><option value="blocked">Blocked</option><option value="done">Done</option></select></label>
-      <menu><button value="cancel">Cerrar</button><button id="saveTask" value="default">Guardar</button></menu>
-    </form>
-  </dialog>
-
-  <script src="./app.js"></script>
+  <script src="./app.js?v=5"></script>
 </body>
 </html>
