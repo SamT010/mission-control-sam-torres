@@ -1,87 +1,168 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mission Control v8</title>
-  <link rel="stylesheet" href="./styles.css?v=8" />
+  <title>Mission Control</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css?v=9.2" />
 </head>
 <body>
+
   <header class="topbar">
-    <div class="brand">🧭 Mission Control <span>v8</span></div>
-    <nav class="tabs">
-      <button class="tab" data-tab="tasks">Tasks</button>
+    <div class="brand">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+      Mission Control
+    </div>
+    <nav class="tabs" id="tabNav">
       <button class="tab active" data-tab="office">Office</button>
+      <button class="tab" data-tab="tasks">Tasks</button>
       <button class="tab" data-tab="agents">AI Agents</button>
+      <button class="tab" data-tab="activity">Activity</button>
       <button class="tab" data-tab="org">Org</button>
     </nav>
-    <div class="pill" id="samPill">Sam: Working</div>
+    <div class="status-chip" id="statusChip">
+      <span class="status-dot working"></span>
+      <span id="chipLabel">System: Online</span>
+    </div>
   </header>
 
   <main>
-    <section id="view-tasks" class="view">
-      <div class="toolbar">
-        <input id="taskTitle" placeholder="Nueva tarea" />
-        <input id="taskAssignee" placeholder="Asignado a agente" />
-        <select id="taskPriority"><option>P0</option><option>P1</option><option>P2</option></select>
-        <button id="addTask">Agregar</button>
-      </div>
-      <div id="kanban" class="kanban"></div>
-    </section>
-
+    <!-- OFFICE -->
     <section id="view-office" class="view active">
       <div class="section-head">
         <h2>The Office</h2>
-        <div class="legend"><span class="dot w"></span>Working <span class="dot m"></span>Moving <span class="dot i"></span>Idle</div>
+        <div class="legend">
+          <span class="legend-item"><span class="dot working"></span>Working</span>
+          <span class="legend-item"><span class="dot moving"></span>Moving</span>
+          <span class="legend-item"><span class="dot idle"></span>Idle</span>
+        </div>
       </div>
       <div class="office-layout">
         <div class="office-map" id="officeMap">
           <div class="desk-row" id="deskRow"></div>
-          <div class="speech" id="speech">Selecciona un AI agent</div>
+          <div class="lounge-area" id="loungeArea">
+            <span class="lounge-label">Lounge</span>
+          </div>
+          <div class="speech" id="speech">Select an AI agent</div>
         </div>
         <aside class="side-panel">
-          <h3 id="selName">AI Agent</h3>
-          <p id="selMeta">Role: -</p>
-          <label>Estado
-            <select id="agentState"><option>Working</option><option>Moving</option><option>Idle</option></select>
+          <div class="panel-header">
+            <h3 id="selName">AI Agent</h3>
+            <span class="panel-badge" id="selBadge">--</span>
+          </div>
+          <p class="panel-role" id="selMeta">Role: --</p>
+          <label class="field-label">Status
+            <select id="agentState">
+              <option>Working</option><option>Moving</option><option>Idle</option>
+            </select>
           </label>
-          <label>Tarea actual
-            <textarea id="agentTask" rows="4" placeholder="Qué está haciendo..."></textarea>
+          <label class="field-label">Current Task
+            <textarea id="agentTask" rows="3" placeholder="What are they working on..."></textarea>
           </label>
-          <button id="saveAgent">Guardar</button>
-          <small>Regla: si está <b>Working</b>, va a su escritorio; si está <b>Moving/Idle</b>, sale del escritorio.</small>
+          <button id="saveAgent" class="btn-primary">Save Changes</button>
+          <div class="panel-hint">
+            <strong>Working</strong> = at their desk<br/>
+            <strong>Moving / Idle</strong> = away from desk
+          </div>
+          <div class="mini-feed" id="miniActivityFeed">
+            <h4>Recent Activity</h4>
+            <ul id="miniLog"></ul>
+          </div>
         </aside>
       </div>
     </section>
 
-    <section id="view-agents" class="view">
+    <!-- TASKS / KANBAN -->
+    <section id="view-tasks" class="view">
       <div class="toolbar">
-        <input id="aName" placeholder="Nombre AI agent" />
-        <input id="aRole" placeholder="Rol (Sourcing, Pricing, Ops...)" />
-        <button id="addAgent">Agregar AI agent</button>
+        <input id="taskTitle" placeholder="New task title..." />
+        <input id="taskAssignee" placeholder="Assign to agent" list="agentNames" />
+        <datalist id="agentNames"></datalist>
+        <select id="taskPriority">
+          <option>P0</option><option>P1</option><option>P2</option>
+        </select>
+        <button id="addTask" class="btn-primary">+ Add Task</button>
       </div>
-      <div id="agentsTable" class="table"></div>
+      <div id="kanban" class="kanban"></div>
     </section>
 
+    <!-- AI AGENTS -->
+    <section id="view-agents" class="view">
+      <div class="toolbar">
+        <input id="aName" placeholder="Agent name" />
+        <input id="aRole" placeholder="Role (Sourcing, Pricing, Ops...)" />
+        <button id="addAgent" class="btn-primary">+ Add Agent</button>
+      </div>
+      <div class="agents-header">
+        <span>Name</span><span>Role</span><span>Status</span><span>Task</span><span></span>
+      </div>
+      <div id="agentsTable" class="agents-list"></div>
+    </section>
+
+    <!-- ACTIVITY FEED -->
+    <section id="view-activity" class="view">
+      <div class="section-head">
+        <h2>Activity Feed</h2>
+        <button id="clearLog" class="btn-secondary btn-sm">Clear Log</button>
+      </div>
+      <div class="activity-feed" id="activityFeed"></div>
+    </section>
+
+    <!-- ORG -->
     <section id="view-org" class="view">
       <div class="org-wrap">
-        <div class="org-node ceo">Emi · CEO / Pricing final</div>
-        <div class="org-row"><div class="org-node">AI Agent Layer</div></div>
-        <div class="org-row" id="orgAgents"></div>
+        <div class="org-tier">
+          <div class="org-node ceo">
+            <span class="org-icon">&#9733;</span>
+            Control Tower
+          </div>
+        </div>
+        <div class="org-connector"></div>
+        <div class="org-tier">
+          <div class="org-node layer-label">AI Agent Layer</div>
+        </div>
+        <div class="org-connector"></div>
+        <div class="org-tier" id="orgAgents"></div>
       </div>
     </section>
   </main>
 
+  <!-- Task detail dialog -->
   <dialog id="taskDialog">
     <form method="dialog" class="dialog-form">
       <h3 id="dTitle"></h3>
-      <label>Detalle<textarea id="dDetail" rows="5"></textarea></label>
-      <label>Asignado<input id="dAssignee" /></label>
-      <label>Estado<select id="dStatus"><option value="backlog">Backlog</option><option value="doing">Doing</option><option value="blocked">Blocked</option><option value="done">Done</option></select></label>
-      <menu><button value="cancel">Cerrar</button><button id="saveTask" value="default">Guardar</button></menu>
+      <label class="field-label">Details
+        <textarea id="dDetail" rows="4"></textarea>
+      </label>
+      <label class="field-label">Assignee
+        <input id="dAssignee" list="agentNames2" />
+        <datalist id="agentNames2"></datalist>
+      </label>
+      <label class="field-label">Priority
+        <select id="dPriority">
+          <option>P0</option><option>P1</option><option>P2</option>
+        </select>
+      </label>
+      <label class="field-label">Status
+        <select id="dStatus">
+          <option value="backlog">Backlog</option>
+          <option value="doing">Doing</option>
+          <option value="blocked">Blocked</option>
+          <option value="done">Done</option>
+        </select>
+      </label>
+      <menu class="dialog-actions">
+        <button type="button" id="deleteTask" class="btn-danger">Delete</button>
+        <span class="spacer"></span>
+        <button value="cancel" class="btn-secondary">Close</button>
+        <button id="saveTask" value="default" class="btn-primary">Save</button>
+      </menu>
     </form>
   </dialog>
 
-  <script src="./app.js?v=8"></script>
+  <script src="./app.js?v=9.2"></script>
 </body>
 </html>
