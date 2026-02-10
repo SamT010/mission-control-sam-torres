@@ -39,14 +39,22 @@
           <h3 id="agentName">Sam Torres</h3>
           <p id="agentState">Selecciona un agente</p>
           <label>Status
-            <select id="agentStatus">
-              <option>Working</option><option>Moving</option><option>Idle</option>
-            </select>
+            <select id="agentStatus"><option>Working</option><option>Moving</option><option>Idle</option></select>
           </label>
           <label>Task actual
-            <textarea id="agentTask" rows="4" placeholder="Qué está haciendo..."></textarea>
+            <textarea id="agentTask" rows="3" placeholder="Qué está haciendo..."></textarea>
           </label>
           <button id="saveAgent">Guardar</button>
+
+          <hr />
+          <h4>Team Chat</h4>
+          <div id="chatFeed" class="chat-feed"></div>
+          <input id="chatInput" placeholder="Mensaje interno..." />
+          <button id="sendChat">Enviar</button>
+
+          <hr />
+          <h4>Timeline</h4>
+          <div id="timeline" class="timeline"></div>
         </aside>
       </div>
     </section>
@@ -66,7 +74,7 @@
     </section>
 
     <section class="view" id="view-memory">
-      <div class="panel"><h2>Memory</h2><p>Próximo: timeline de decisiones y aprendizajes.</p></div>
+      <div class="panel"><h2>Memory</h2><p>Timeline de decisiones y aprendizajes (siguiente integración con archivos de memoria).</p></div>
     </section>
   </main>
 
