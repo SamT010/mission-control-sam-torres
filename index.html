@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mission Control Office v5</title>
-  <link rel="stylesheet" href="./styles.css?v=5" />
+  <title>Mission Control Office v6</title>
+  <link rel="stylesheet" href="./styles.css?v=6" />
 </head>
 <body>
   <header class="topbar">
     <div class="left">
-      <div class="logo">🧭 Mission Control <span class="ver">v5</span></div>
+      <div class="logo">🧭 Mission Control <span class="ver">v6</span></div>
       <nav class="menu">
         <button class="tab" data-tab="tasks">Tasks</button>
-        <button class="tab">Chat</button>
-        <button class="tab">Council</button>
-        <button class="tab">Calendar</button>
-        <button class="tab">Projects</button>
-        <button class="tab">People</button>
+        <button class="tab" data-tab="chat">Chat</button>
+        <button class="tab" data-tab="council">Council</button>
+        <button class="tab" data-tab="calendar">Calendar</button>
+        <button class="tab" data-tab="projects">Projects</button>
+        <button class="tab" data-tab="people">People</button>
         <button class="tab active" data-tab="office">Office</button>
       </nav>
     </div>
@@ -28,40 +28,46 @@
       <div class="toolbar">
         <input id="taskTitle" placeholder="Nueva tarea" />
         <input id="taskAssignee" placeholder="Asignado a" />
+        <select id="taskPriority"><option>P0</option><option>P1</option><option>P2</option></select>
         <button id="addTask">Agregar</button>
       </div>
-      <div class="board" id="board"></div>
+      <div class="kanban" id="kanban"></div>
     </section>
 
     <section class="view active" id="view-office">
       <div class="office-head">
-        <div>
-          <h2>The Office</h2>
-          <p>All team headquarters</p>
-        </div>
+        <div><h2>The Office</h2><p>All team headquarters</p></div>
         <div class="legend"><span class="dot work"></span>Working <span class="dot move"></span>Moving <span class="dot idle"></span>Idle</div>
       </div>
-
       <div class="office-canvas" id="officeCanvas">
         <div class="top-desks"></div>
         <div class="label" id="bubbleLabel">Build Council - Sprint SKU</div>
       </div>
-
       <div class="office-controls">
-        <label>Agente
-          <select id="agentPick"></select>
-        </label>
-        <label>Estado
-          <select id="agentState"><option>Working</option><option>Moving</option><option>Idle</option></select>
-        </label>
-        <label>Tarea actual
-          <input id="agentTask" placeholder="Qué está haciendo..." />
-        </label>
+        <label>Agente<select id="agentPick"></select></label>
+        <label>Estado<select id="agentState"><option>Working</option><option>Moving</option><option>Idle</option></select></label>
+        <label>Tarea actual<input id="agentTask" placeholder="Qué está haciendo..." /></label>
         <button id="saveAgent">Guardar</button>
       </div>
     </section>
+
+    <section class="view" id="view-chat"><div class="panel">Chat interno (placeholder)</div></section>
+    <section class="view" id="view-council"><div class="panel">Council (placeholder)</div></section>
+    <section class="view" id="view-calendar"><div class="panel">Calendar (placeholder)</div></section>
+    <section class="view" id="view-projects"><div class="panel">Projects (placeholder)</div></section>
+    <section class="view" id="view-people"><div class="panel">People (placeholder)</div></section>
   </main>
 
-  <script src="./app.js?v=5"></script>
+  <dialog id="taskDialog">
+    <form method="dialog" class="dialog-form">
+      <h3 id="dTitle"></h3>
+      <label>Detalle<textarea id="dDetail" rows="5"></textarea></label>
+      <label>Asignado<input id="dAssignee" /></label>
+      <label>Estado<select id="dStatus"><option value="backlog">Backlog</option><option value="doing">Doing</option><option value="blocked">Blocked</option><option value="done">Done</option></select></label>
+      <menu><button value="cancel">Cerrar</button><button id="saveTask" value="default">Guardar</button></menu>
+    </form>
+  </dialog>
+
+  <script src="./app.js?v=6"></script>
 </body>
 </html>
