@@ -3,59 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mission Control Office v6</title>
-  <link rel="stylesheet" href="./styles.css?v=6" />
+  <title>Mission Control v7</title>
+  <link rel="stylesheet" href="./styles.css?v=7" />
 </head>
 <body>
   <header class="topbar">
-    <div class="left">
-      <div class="logo">🧭 Mission Control <span class="ver">v6</span></div>
-      <nav class="menu">
-        <button class="tab" data-tab="tasks">Tasks</button>
-        <button class="tab" data-tab="chat">Chat</button>
-        <button class="tab" data-tab="council">Council</button>
-        <button class="tab" data-tab="calendar">Calendar</button>
-        <button class="tab" data-tab="projects">Projects</button>
-        <button class="tab" data-tab="people">People</button>
-        <button class="tab active" data-tab="office">Office</button>
-      </nav>
-    </div>
-    <div class="right">Sam: <b id="samPill">Working</b></div>
+    <div class="brand">🧭 Mission Control <span>v7</span></div>
+    <nav id="tabs" class="tabs">
+      <button class="tab active" data-tab="tasks">Tasks</button>
+      <button class="tab" data-tab="office">Office</button>
+      <button class="tab" data-tab="workers">Workers</button>
+      <button class="tab" data-tab="org">Org</button>
+    </nav>
+    <div class="pill" id="samPill">Sam: Working</div>
   </header>
 
   <main>
-    <section class="view" id="view-tasks">
+    <section id="view-tasks" class="view active">
       <div class="toolbar">
         <input id="taskTitle" placeholder="Nueva tarea" />
         <input id="taskAssignee" placeholder="Asignado a" />
         <select id="taskPriority"><option>P0</option><option>P1</option><option>P2</option></select>
         <button id="addTask">Agregar</button>
       </div>
-      <div class="kanban" id="kanban"></div>
+      <div id="kanban" class="kanban"></div>
     </section>
 
-    <section class="view active" id="view-office">
-      <div class="office-head">
-        <div><h2>The Office</h2><p>All team headquarters</p></div>
-        <div class="legend"><span class="dot work"></span>Working <span class="dot move"></span>Moving <span class="dot idle"></span>Idle</div>
+    <section id="view-office" class="view">
+      <div class="section-head">
+        <h2>The Office</h2>
+        <div class="legend"><span class="dot w"></span>Working <span class="dot m"></span>Moving <span class="dot i"></span>Idle</div>
       </div>
-      <div class="office-canvas" id="officeCanvas">
-        <div class="top-desks"></div>
-        <div class="label" id="bubbleLabel">Build Council - Sprint SKU</div>
-      </div>
-      <div class="office-controls">
-        <label>Agente<select id="agentPick"></select></label>
-        <label>Estado<select id="agentState"><option>Working</option><option>Moving</option><option>Idle</option></select></label>
-        <label>Tarea actual<input id="agentTask" placeholder="Qué está haciendo..." /></label>
-        <button id="saveAgent">Guardar</button>
+      <div class="office-layout">
+        <div class="office-map" id="officeMap">
+          <div class="desk-row" id="deskRow"></div>
+          <div class="speech" id="speech">Selecciona un worker</div>
+        </div>
+        <aside class="side-panel">
+          <h3 id="selName">Worker</h3>
+          <p id="selMeta">Role · Type</p>
+          <label>Estado
+            <select id="workerState"><option>Working</option><option>Moving</option><option>Idle</option></select>
+          </label>
+          <label>Tarea actual
+            <textarea id="workerTask" rows="4" placeholder="Qué está haciendo..."></textarea>
+          </label>
+          <button id="saveWorker">Guardar</button>
+        </aside>
       </div>
     </section>
 
-    <section class="view" id="view-chat"><div class="panel">Chat interno (placeholder)</div></section>
-    <section class="view" id="view-council"><div class="panel">Council (placeholder)</div></section>
-    <section class="view" id="view-calendar"><div class="panel">Calendar (placeholder)</div></section>
-    <section class="view" id="view-projects"><div class="panel">Projects (placeholder)</div></section>
-    <section class="view" id="view-people"><div class="panel">People (placeholder)</div></section>
+    <section id="view-workers" class="view">
+      <div class="toolbar">
+        <input id="wName" placeholder="Nombre worker" />
+        <input id="wRole" placeholder="Rol (ej. Sourcing)" />
+        <select id="wType"><option value="human">Human</option><option value="agent">Agent</option></select>
+        <button id="addWorker">Agregar worker</button>
+      </div>
+      <div id="workersTable" class="table"></div>
+    </section>
+
+    <section id="view-org" class="view">
+      <div class="org-wrap">
+        <div class="org-node ceo">Emi · CEO / Pricing final</div>
+        <div class="org-row">
+          <div class="org-node">Comercial</div>
+          <div class="org-node">Operaciones</div>
+          <div class="org-node">Finanzas</div>
+          <div class="org-node">Tech/Data</div>
+        </div>
+        <div class="org-row" id="orgWorkers"></div>
+      </div>
+    </section>
   </main>
 
   <dialog id="taskDialog">
@@ -68,6 +87,6 @@
     </form>
   </dialog>
 
-  <script src="./app.js?v=6"></script>
+  <script src="./app.js?v=7"></script>
 </body>
 </html>
